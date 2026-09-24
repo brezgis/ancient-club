@@ -1,0 +1,778 @@
+[
+  {
+    "slug": "nefertiti",
+    "file": "nefertiti.glb",
+    "title": "Bust of Nefertiti",
+    "museum": "Ägyptisches Museum und Papyrussammlung, Staatliche Museen zu Berlin (Neues Museum)",
+    "accession_number": "ÄM 21300",
+    "date": "c. 1351–1334 BC (reign of Amenhotep IV/Akhenaten), 18th Dynasty",
+    "material": "Limestone, painted; gypsum plaster, rock crystal, wax",
+    "real_height_m": 0.49,
+    "category": "queen",
+    "license": "CC BY-NC-SA 4.0 (license assigned by the Staatliche Museen zu Berlin; NonCommercial + ShareAlike)",
+    "source_url": "https://www.thingiverse.com/thing:3974391 (mirror used: https://archive.org/details/thingiverse-3974391)",
+    "attribution": "Staatliche Museen zu Berlin – Preußischer Kulturbesitz. Bust of Queen Nefertiti, Ägyptisches Museum und Papyrussammlung, Ident. Nr. ÄM 21300. 3D model by Trigon Art, Berlin 2008 (structured-light scan). © 3D Model: Ägyptisches Museum und Papyrussammlung, Staatliche Museen zu Berlin – Preußischer Kulturbesitz, ID aem_aem21300_3dsl01_mo08-03_p. Licensed CC BY-NC-SA 4.0. Released via Cosmo Wenman's freedom-of-information request (2019).",
+    "triangle_count": 200000,
+    "has_texture": true,
+    "facts": [
+      "Found in 1912 at Amarna by Ludwig Borchardt's German excavation, in the workshop of the sculptor Thutmose.",
+      "Made of painted limestone with a gypsum plaster layer; the one inlaid eye is rock crystal.",
+      "Her left eye has no inlay."
+    ],
+    "notes": "The official museum scan (6.4M triangles, full color), decimated to 200k with its color texture kept (2048px JPEG). The museum's CC license text is carved into the underside of the mesh. Non-commercial use only; derivatives must stay CC BY-NC-SA. Some commentators (and Creative Commons) dispute whether a museum can claim copyright over a scan of a public-domain object, but I used the license as stated. Native scan units are mm, so real scale is preserved.",
+    "bounds_m": {
+      "min": [
+        -0.121,
+        0.0,
+        -0.1827
+      ],
+      "max": [
+        0.121,
+        0.4975,
+        0.1827
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "kaaper",
+    "file": "kaaper.glb",
+    "title": "Standing man: Kaaper, known as 'Sheikh el-Beled' (cast)",
+    "museum": "Original: Egyptian Museum, Cairo. Scanned cast: Statens Museum for Kunst, Copenhagen",
+    "accession_number": "SMK KAS2366 (cast)",
+    "date": "c. 2470 BC, 5th Dynasty (original)",
+    "material": "Original: wood. Cast: painted plaster",
+    "real_height_m": 1.2,
+    "category": "dancer",
+    "license": "Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/), as stated by SMK's open API",
+    "source_url": "https://open.smk.dk/artwork/image/KAS2366",
+    "attribution": "3D scan of a plaster cast: Statens Museum for Kunst (SMK), Copenhagen, Royal Cast Collection (Den Kongelige Afstøbningssamling). Attribution not required; credit appreciated.",
+    "triangle_count": 200000,
+    "has_texture": false,
+    "facts": [
+      "Found at Saqqara (mastaba C 8) and dates to about 2470 BC in the 5th Dynasty.",
+      "Workers at the excavation nicknamed him 'Sheikh el-Beled' (village headman) because he looked like their own village chief.",
+      "The original is carved from wood. The staff he once held is missing."
+    ],
+    "notes": "This is a scan of SMK's plaster CAST of the original, not the ancient object itself. Scan units unknown; scaled so height equals the cast's catalogued height. Untextured (geometry only). Decimated from SMK's '_small' STL (~400k tris). Height 1.20 m is the cast's catalogued height.",
+    "bounds_m": {
+      "min": [
+        -0.2089,
+        0.0,
+        -0.2413
+      ],
+      "max": [
+        0.2089,
+        1.2,
+        0.2413
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "khafre",
+    "file": "khafre.glb",
+    "title": "King Khafre (Chephren) Enthroned with the Horus Falcon (cast)",
+    "museum": "Original: Egyptian Museum, Cairo. Scanned cast: Statens Museum for Kunst, Copenhagen",
+    "accession_number": "SMK KAS37 (cast)",
+    "date": "c. 2560 BC, Old Kingdom, 4th Dynasty (original)",
+    "material": "Original: anorthosite gneiss (often called 'diorite'). Cast: plaster",
+    "real_height_m": 1.69,
+    "category": "dancer",
+    "license": "Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/), as stated by SMK's open API",
+    "source_url": "https://open.smk.dk/artwork/image/KAS37",
+    "attribution": "3D scan of a plaster cast: Statens Museum for Kunst (SMK), Copenhagen, Royal Cast Collection (Den Kongelige Afstøbningssamling). Attribution not required; credit appreciated.",
+    "triangle_count": 200000,
+    "has_texture": false,
+    "facts": [
+      "Found at Giza in the valley temple of Khafre, builder of the second pyramid there.",
+      "A Horus falcon perches behind the king's head and wraps its wings around it, showing the god protecting him.",
+      "The throne's sides show the plants of Upper and Lower Egypt bound together, a symbol of the united country."
+    ],
+    "notes": "This is a scan of SMK's plaster CAST of the original, not the ancient object itself. Scan units unknown; scaled so height equals the cast's catalogued height. Untextured (geometry only). Decimated from SMK's '_small' STL (~400k tris). Seated figure.",
+    "bounds_m": {
+      "min": [
+        -0.3052,
+        0.0,
+        -0.4953
+      ],
+      "max": [
+        0.3052,
+        1.69,
+        0.4953
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "bekenkhons",
+    "file": "bekenkhons.glb",
+    "title": "Bakenkhons (Bek-en-Khons), prophet of Amun and master builder: block statue (cast)",
+    "museum": "Scanned cast: Statens Museum for Kunst, Copenhagen (the SMK record does not name the original's current location)",
+    "accession_number": "SMK KAS805 (cast)",
+    "date": "c. 1297–1185 BC, 19th Dynasty (original)",
+    "material": "Cast: plaster",
+    "real_height_m": 1.62,
+    "category": "dancer",
+    "license": "Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/), as stated by SMK's open API",
+    "source_url": "https://open.smk.dk/artwork/image/KAS805",
+    "attribution": "3D scan of a plaster cast: Statens Museum for Kunst (SMK), Copenhagen, Royal Cast Collection (Den Kongelige Afstøbningssamling). Attribution not required; credit appreciated.",
+    "triangle_count": 200000,
+    "has_texture": false,
+    "facts": [
+      "Bakenkhons was a priest ('prophet') of Amun and a master builder at Thebes. His tomb there is TT35.",
+      "In a block statue the owner squats with his knees drawn up and his body wrapped in a cloak, which leaves broad flat surfaces for inscriptions."
+    ],
+    "notes": "This is a scan of SMK's plaster CAST of the original, not the ancient object itself. Scan units unknown; scaled so height equals the cast's catalogued height. Untextured (geometry only). Decimated from SMK's '_small' STL (~400k tris). According to SMK, the original was found at Thebes in 1818. I believe it is the block statue now in Munich, but I have not confirmed this.",
+    "bounds_m": {
+      "min": [
+        -0.3791,
+        0.0,
+        -0.5325
+      ],
+      "max": [
+        0.3791,
+        1.62,
+        0.5325
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "woman_grinding_grain",
+    "file": "woman_grinding_grain.glb",
+    "title": "Kneeling woman grinding grain: servant statue (cast)",
+    "museum": "Original: Ägyptisches Museum, Berlin. Scanned cast: Statens Museum for Kunst, Copenhagen",
+    "accession_number": "SMK KAS2228 (cast)",
+    "date": "c. 2400 BC, 5th Dynasty (original)",
+    "material": "Original: limestone. Cast: plaster",
+    "real_height_m": 0.265,
+    "category": "bartender",
+    "license": "Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/), as stated by SMK's open API",
+    "source_url": "https://open.smk.dk/artwork/image/KAS2228",
+    "attribution": "3D scan of a plaster cast: Statens Museum for Kunst (SMK), Copenhagen, Royal Cast Collection (Den Kongelige Afstøbningssamling). Attribution not required; credit appreciated.",
+    "triangle_count": 200000,
+    "has_texture": false,
+    "facts": [
+      "Servant statues like this were placed in Old Kingdom tombs to provide food for the dead person in the afterlife.",
+      "She is grinding grain on a stone quern. Flour and grain were the basis of bread and beer, the two staples of the Egyptian diet."
+    ],
+    "notes": "This is a scan of SMK's plaster CAST of the original, not the ancient object itself. Scan units unknown; scaled so height equals the cast's catalogued height. Untextured (geometry only). Decimated from SMK's '_small' STL (~400k tris). It is 42 cm long, so it is a good fit for a bartender or brewer behind the bar.",
+    "bounds_m": {
+      "min": [
+        -0.0666,
+        0.0,
+        -0.2176
+      ],
+      "max": [
+        0.0666,
+        0.265,
+        0.2176
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "young_queen_nefertiti",
+    "file": "young_queen_nefertiti.glb",
+    "title": "Head of a young queen (Nefertiti) (cast)",
+    "museum": "Original: Ägyptisches Museum, Berlin. Scanned cast: Statens Museum for Kunst, Copenhagen",
+    "accession_number": "SMK KAS2224 (cast)",
+    "date": "c. 1350 BC, Amarna period, 18th Dynasty (original)",
+    "material": "Cast: plaster",
+    "real_height_m": 0.225,
+    "category": "queen",
+    "license": "Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/), as stated by SMK's open API",
+    "source_url": "https://open.smk.dk/artwork/image/KAS2224",
+    "attribution": "3D scan of a plaster cast: Statens Museum for Kunst (SMK), Copenhagen, Royal Cast Collection (Den Kongelige Afstøbningssamling). Attribution not required; credit appreciated.",
+    "triangle_count": 200000,
+    "has_texture": false,
+    "facts": [
+      "Excavated at Tell el-Amarna in 1912–13, in house P 47.2, the workshop of the sculptor Thutmose.",
+      "The stub on top of the head was a tenon for attaching a separately made crown or wig."
+    ],
+    "notes": "This is a scan of SMK's plaster CAST of the original, not the ancient object itself. Scan units unknown; scaled so height equals the cast's catalogued height. Untextured (geometry only). Decimated from SMK's '_small' STL (~400k tris). It is a head, not a full figure. I added the tenon fact from looking at the model's shape; it is the standard reading of that feature, but SMK does not say it.",
+    "bounds_m": {
+      "min": [
+        -0.061,
+        0.0,
+        -0.069
+      ],
+      "max": [
+        0.061,
+        0.225,
+        0.069
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "amarna_princess",
+    "file": "amarna_princess.glb",
+    "title": "Head of an Amarna princess (cast)",
+    "museum": "Original: Egyptian Museum, Cairo. Scanned cast: Statens Museum for Kunst, Copenhagen",
+    "accession_number": "SMK KAS2226 (cast)",
+    "date": "1365–1349 BC, Amarna period, 18th Dynasty (original)",
+    "material": "Cast: plaster",
+    "real_height_m": 0.165,
+    "category": "female",
+    "license": "Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/), as stated by SMK's open API",
+    "source_url": "https://open.smk.dk/artwork/image/KAS2226",
+    "attribution": "3D scan of a plaster cast: Statens Museum for Kunst (SMK), Copenhagen, Royal Cast Collection (Den Kongelige Afstøbningssamling). Attribution not required; credit appreciated.",
+    "triangle_count": 200000,
+    "has_texture": false,
+    "facts": [
+      "Found at Tell el-Amarna in the workshop of the chief sculptor Thutmose.",
+      "Akhenaten's daughters were often shown with elongated skulls, a hallmark of Amarna art."
+    ],
+    "notes": "This is a scan of SMK's plaster CAST of the original, not the ancient object itself. Scan units unknown; scaled so height equals the cast's catalogued height. Untextured (geometry only). Decimated from SMK's '_small' STL (~400k tris). Head on a modern base.",
+    "bounds_m": {
+      "min": [
+        -0.0449,
+        0.0,
+        -0.0591
+      ],
+      "max": [
+        0.0449,
+        0.165,
+        0.0591
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "amarna_princess_2",
+    "file": "amarna_princess_2.glb",
+    "title": "Head of an Amarna princess (cast)",
+    "museum": "Original: Ägyptisches Museum, Berlin. Scanned cast: Statens Museum for Kunst, Copenhagen",
+    "accession_number": "SMK KAS2225 (cast)",
+    "date": "c. 1350 BC, Amarna period, 18th Dynasty (original)",
+    "material": "Cast: plaster",
+    "real_height_m": 0.21,
+    "category": "female",
+    "license": "Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/), as stated by SMK's open API",
+    "source_url": "https://open.smk.dk/artwork/image/KAS2225",
+    "attribution": "3D scan of a plaster cast: Statens Museum for Kunst (SMK), Copenhagen, Royal Cast Collection (Den Kongelige Afstøbningssamling). Attribution not required; credit appreciated.",
+    "triangle_count": 200000,
+    "has_texture": false,
+    "facts": [
+      "Excavated at Tell el-Amarna in 1912–13, in house P 47.1 (the Thutmose workshop complex).",
+      "Akhenaten's daughters were often shown with elongated skulls, a hallmark of Amarna art."
+    ],
+    "notes": "This is a scan of SMK's plaster CAST of the original, not the ancient object itself. Scan units unknown; scaled so height equals the cast's catalogued height. Untextured (geometry only). Decimated from SMK's '_small' STL (~400k tris). Head on a modern base.",
+    "bounds_m": {
+      "min": [
+        -0.0518,
+        0.0,
+        -0.067
+      ],
+      "max": [
+        0.0518,
+        0.21,
+        0.067
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "taharqa_stela",
+    "file": "taharqa_stela.glb",
+    "title": "Stela with a kneeling king, possibly Taharqa ('Ethiopian stela') (cast)",
+    "museum": "Scanned cast: Statens Museum for Kunst, Copenhagen (SMK does not name the original's location)",
+    "accession_number": "SMK KAS1737 (cast)",
+    "date": "c. 700 BC (original)",
+    "material": "Cast: plaster",
+    "real_height_m": 1.61,
+    "category": "stela",
+    "license": "Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/), as stated by SMK's open API",
+    "source_url": "https://open.smk.dk/artwork/image/KAS1737",
+    "attribution": "3D scan of a plaster cast: Statens Museum for Kunst (SMK), Copenhagen, Royal Cast Collection (Den Kongelige Afstøbningssamling). Attribution not required; credit appreciated.",
+    "triangle_count": 150000,
+    "has_texture": false,
+    "facts": [
+      "Taharqa was a Kushite (Nubian) pharaoh of the 25th Dynasty who ruled Egypt c. 690–664 BC.",
+      "A stela is an upright inscribed slab. Its rounded top often shows the king making offerings to the gods."
+    ],
+    "notes": "This is a scan of SMK's plaster CAST of the original, not the ancient object itself. Scan units unknown; scaled so height equals the cast's catalogued height. Untextured (geometry only). Decimated from SMK's '_small' STL (~400k tris). SMK's own title puts a question mark on the identification as Taharqa. The relief is very shallow at this resolution, so a normal map or raking light will help show it.",
+    "bounds_m": {
+      "min": [
+        -0.3877,
+        0.0,
+        -0.0581
+      ],
+      "max": [
+        0.3877,
+        1.61,
+        0.0581
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "ramesside_queen_relief",
+    "file": "ramesside_queen_relief.glb",
+    "title": "Relief fragment: a queen (or daughter of Ramesses II) (cast)",
+    "museum": "Scanned cast: Statens Museum for Kunst, Copenhagen (original location uncertain per SMK)",
+    "accession_number": "SMK KAS1723 (cast)",
+    "date": "19th Dynasty, c. 1295–1186 BC (original)",
+    "material": "Cast: plaster",
+    "real_height_m": 2.14,
+    "category": "female",
+    "license": "Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/), as stated by SMK's open API",
+    "source_url": "https://open.smk.dk/artwork/image/KAS1723",
+    "attribution": "3D scan of a plaster cast: Statens Museum for Kunst (SMK), Copenhagen, Royal Cast Collection (Den Kongelige Afstøbningssamling). Attribution not required; credit appreciated.",
+    "triangle_count": 149999,
+    "has_texture": false,
+    "facts": [
+      "Carved in the 19th Dynasty, the era of Ramesses II.",
+      "SMK's inventory once called her a daughter of Ramesses II, but a later note says she is more likely a queen (royal wife)."
+    ],
+    "notes": "This is a scan of SMK's plaster CAST of the original, not the ancient object itself. Scan units unknown; scaled so height equals the cast's catalogued height. Untextured (geometry only). Decimated from SMK's '_small' STL (~400k tris). It is a tall relief slab, so it can double as a wall panel or stela.",
+    "bounds_m": {
+      "min": [
+        -0.5124,
+        0.0,
+        -0.1477
+      ],
+      "max": [
+        0.5124,
+        2.14,
+        0.1477
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "sekhmet_mahg",
+    "file": "sekhmet_mahg.glb",
+    "title": "Monumental statue of Sekhmet",
+    "museum": "Musée d'art et d'histoire (MAH), Geneva",
+    "accession_number": "MAHG 20926",
+    "date": "c. 1400 BC (New Kingdom, 18th Dynasty)",
+    "material": "Granodiorite",
+    "real_height_m": 2.15,
+    "category": "female",
+    "license": "CC BY-SA 3.0 FR (uploader's multi-license; CC BY-SA 2.0 FR and CeCILL also offered)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Sekhmet-MAHG_20926-High_poly-001.stl",
+    "attribution": "3D model by Rama (Wikimedia Commons), CC BY-SA 3.0 FR. Object: Musée d'art et d'histoire, Geneva.",
+    "triangle_count": 200000,
+    "has_texture": false,
+    "facts": [
+      "Sekhmet was the lioness-headed goddess of war, plague and healing.",
+      "Found in the Precinct of Mut at Karnak. Amenhotep III set up hundreds of Sekhmet statues at Thebes."
+    ],
+    "notes": "Photogrammetry by Wikimedia Commons user Rama. Untextured STL. The Commons 'Public domain' tag (where it appears) refers to the ancient artwork, not the 3D model; the model itself is CC BY-SA, so this glb (a derivative) should be shared under CC BY-SA with attribution to Rama. Object metadata from Wikidata. Seated figure, 2.15 m.",
+    "bounds_m": {
+      "min": [
+        -0.2767,
+        0.0,
+        -0.5326
+      ],
+      "max": [
+        0.2767,
+        2.15,
+        0.5326
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "ramesses_ii_mahg",
+    "file": "ramesses_ii_mahg.glb",
+    "title": "Seated statue of Ramesses II",
+    "museum": "Musée d'art et d'histoire (MAH), Geneva",
+    "accession_number": "MAHG 8934",
+    "date": "c. 1279–1213 BC (reign of Ramesses II, 19th Dynasty)",
+    "material": "Granodiorite",
+    "real_height_m": 1.98,
+    "category": "dancer",
+    "license": "CC BY-SA 3.0 FR (uploader's multi-license; CC BY-SA 2.0 FR and CeCILL also offered)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ramesses_II-MAHG_8934-High_poly-001.stl",
+    "attribution": "3D model by Rama (Wikimedia Commons), CC BY-SA 3.0 FR. Object: Musée d'art et d'histoire, Geneva.",
+    "triangle_count": 199999,
+    "has_texture": false,
+    "facts": [
+      "Found at Bubastis in the Nile Delta and given to Geneva by the Egypt Exploration Fund.",
+      "Ramesses II reigned for about 66 years, one of the longest reigns in Egyptian history."
+    ],
+    "notes": "Photogrammetry by Wikimedia Commons user Rama. Untextured STL. The Commons 'Public domain' tag (where it appears) refers to the ancient artwork, not the 3D model; the model itself is CC BY-SA, so this glb (a derivative) should be shared under CC BY-SA with attribution to Rama. Object metadata from Wikidata.",
+    "bounds_m": {
+      "min": [
+        -0.4799,
+        0.0,
+        -0.6667
+      ],
+      "max": [
+        0.4799,
+        1.98,
+        0.6667
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "nemtynakht_mahg",
+    "file": "nemtynakht_mahg.glb",
+    "title": "Seated statuette of Nemtynakht",
+    "museum": "Musée d'art et d'histoire (MAH), Geneva",
+    "accession_number": "MAHG 26035",
+    "date": "c. 1800 BC (Middle Kingdom, per Wikidata)",
+    "material": "Quartzite",
+    "real_height_m": 0.237,
+    "category": "dancer",
+    "license": "CC BY-SA 3.0 FR (uploader's multi-license; CC BY-SA 2.0 FR and CeCILL also offered)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Figurine_of_Nemtynakht-MAHG_26035-High_poly-001.stl",
+    "attribution": "3D model by Rama (Wikimedia Commons), CC BY-SA 3.0 FR. Object: Musée d'art et d'histoire, Geneva.",
+    "triangle_count": 199999,
+    "has_texture": false,
+    "facts": [
+      "A small private statuette of a man named Nemtynakht, carved in hard quartzite."
+    ],
+    "notes": "Photogrammetry by Wikimedia Commons user Rama. Untextured STL. The Commons 'Public domain' tag (where it appears) refers to the ancient artwork, not the 3D model; the model itself is CC BY-SA, so this glb (a derivative) should be shared under CC BY-SA with attribution to Rama. Object metadata from Wikidata.",
+    "bounds_m": {
+      "min": [
+        -0.0459,
+        0.0,
+        -0.08
+      ],
+      "max": [
+        0.0459,
+        0.237,
+        0.08
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "standing_man_mahg",
+    "file": "standing_man_mahg.glb",
+    "title": "Standing man figurine",
+    "museum": "Musée d'art et d'histoire (MAH), Geneva",
+    "accession_number": "MAHG 23458",
+    "date": "c. 1900 BC (Middle Kingdom, per Wikidata)",
+    "material": "Painted wood",
+    "real_height_m": 0.134,
+    "category": "dancer",
+    "license": "CC BY-SA 3.0 FR (uploader's multi-license; CC BY-SA 2.0 FR and CeCILL also offered)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Standing_man_figurine-MAHG_23458-High_poly-001.stl",
+    "attribution": "3D model by Rama (Wikimedia Commons), CC BY-SA 3.0 FR. Object: Musée d'art et d'histoire, Geneva.",
+    "triangle_count": 111849,
+    "has_texture": false,
+    "facts": [
+      "Small wooden figures like this were placed in Middle Kingdom tombs."
+    ],
+    "notes": "Photogrammetry by Wikimedia Commons user Rama. Untextured STL. The Commons 'Public domain' tag (where it appears) refers to the ancient artwork, not the 3D model; the model itself is CC BY-SA, so this glb (a derivative) should be shared under CC BY-SA with attribution to Rama. Object metadata from Wikidata. Standing upright with a slim profile, which makes it a good dancer if you scale it up.",
+    "bounds_m": {
+      "min": [
+        -0.0211,
+        0.0,
+        -0.0429
+      ],
+      "max": [
+        0.0211,
+        0.134,
+        0.0429
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "royal_couple_mahg",
+    "file": "royal_couple_mahg.glb",
+    "title": "Royal couple: King Ay and Queen Tey (upper bodies)",
+    "museum": "Musée d'art et d'histoire (MAH), Geneva",
+    "accession_number": "MAHG 12440",
+    "date": "c. 1400–1320 BC (Wikidata gives c. 1400 BC; Ay reigned c. 1323–1319 BC)",
+    "material": "Limestone and plaster",
+    "real_height_m": 0.2,
+    "category": "queen",
+    "license": "CC BY-SA 3.0 FR (uploader's multi-license; CC BY-SA 2.0 FR and CeCILL also offered)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Royal_couple-MAHG_12440-High_poly.stl",
+    "attribution": "3D model by Rama (Wikimedia Commons), CC BY-SA 3.0 FR. Object: Musée d'art et d'histoire, Geneva.",
+    "triangle_count": 200000,
+    "has_texture": false,
+    "facts": [
+      "Ay became pharaoh after Tutankhamun's death. Tey was his queen.",
+      "Per Wikidata, the figure of Tey is a reproduction of a piece now in the Hermitage, St Petersburg (inv. 18477)."
+    ],
+    "notes": "Photogrammetry by Wikimedia Commons user Rama. Untextured STL. The Commons 'Public domain' tag (where it appears) refers to the ancient artwork, not the 3D model; the model itself is CC BY-SA, so this glb (a derivative) should be shared under CC BY-SA with attribution to Rama. Object metadata from Wikidata. A fragment (heads and torsos only, 20 cm).",
+    "bounds_m": {
+      "min": [
+        -0.1855,
+        0.0,
+        -0.0598
+      ],
+      "max": [
+        0.1855,
+        0.2,
+        0.0598
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "princess_mahg",
+    "file": "princess_mahg.glb",
+    "title": "Statuette of a princess (11th Dynasty)",
+    "museum": "Musée d'art et d'histoire (MAH), Geneva",
+    "accession_number": "MAHG 4766",
+    "date": "c. 2050 BC (reign of Nebhepetre Mentuhotep II, 11th Dynasty)",
+    "material": "Painted limestone",
+    "real_height_m": null,
+    "category": "female",
+    "license": "CC BY-SA 3.0 FR (uploader's multi-license; CC BY-SA 2.0 FR and CeCILL also offered)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Princess-MAHG_4766-High_poly-001.stl",
+    "attribution": "3D model by Rama (Wikimedia Commons), CC BY-SA 3.0 FR. Object: Musée d'art et d'histoire, Geneva.",
+    "triangle_count": 199997,
+    "has_texture": false,
+    "facts": [
+      "From Deir el-Bahari (Thebes), the site of Mentuhotep II's mortuary temple, according to Wikidata."
+    ],
+    "notes": "Photogrammetry by Wikimedia Commons user Rama. Untextured STL. The Commons 'Public domain' tag (where it appears) refers to the ancient artwork, not the 3D model; the model itself is CC BY-SA, so this glb (a derivative) should be shared under CC BY-SA with attribution to Rama. Object metadata from Wikidata. Real height unknown. Left in the scan's native units (0.90 tall), which are probably not meters, so set its scale yourself. The fragment is a head and shoulders against a back slab.",
+    "bounds_m": {
+      "min": [
+        -0.3678,
+        0.0,
+        -0.1987
+      ],
+      "max": [
+        0.3678,
+        0.8995,
+        0.1987
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "priest_hor_mahg",
+    "file": "priest_hor_mahg.glb",
+    "title": "Priest Hor-Neferibremen carrying a statuette of Osiris (fragmentary)",
+    "museum": "Musée d'art et d'histoire (MAH), Geneva",
+    "accession_number": "MAHG Eg 9",
+    "date": "c. 600 BC (Late Period, 26th Dynasty, per Wikidata)",
+    "material": "Greywacke",
+    "real_height_m": null,
+    "category": "other",
+    "license": "CC BY-SA 3.0 FR (uploader's multi-license; CC BY-SA 2.0 FR and CeCILL also offered)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Priest_Hor_Neferibremen_carrying_Osiris-Eg_9-High_poly.stl",
+    "attribution": "3D model by Rama (Wikimedia Commons), CC BY-SA 3.0 FR. Object: Musée d'art et d'histoire, Geneva.",
+    "triangle_count": 199999,
+    "has_texture": false,
+    "facts": [
+      "A kneeling priest holds a figure of Osiris, god of the dead, in front of him.",
+      "From Thebes, according to Wikidata."
+    ],
+    "notes": "Photogrammetry by Wikimedia Commons user Rama. Untextured STL. The Commons 'Public domain' tag (where it appears) refers to the ancient artwork, not the 3D model; the model itself is CC BY-SA, so this glb (a derivative) should be shared under CC BY-SA with attribution to Rama. Object metadata from Wikidata. Real height unknown. Native units give 0.39 tall. Badly broken, so it works better as a set piece than a dancer.",
+    "bounds_m": {
+      "min": [
+        -0.0708,
+        0.0,
+        -0.1478
+      ],
+      "max": [
+        0.0708,
+        0.3884,
+        0.1478
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "aphrodite_mahg",
+    "file": "aphrodite_mahg.glb",
+    "title": "Aphrodite (Roman copy of a Hellenistic statue, headless)",
+    "museum": "Musée d'art et d'histoire (MAH), Geneva",
+    "accession_number": "MAHG 19025",
+    "date": "c. 150 BC (Hellenistic type; the copy is Roman)",
+    "material": "Marble",
+    "real_height_m": null,
+    "category": "female",
+    "license": "CC BY-SA 3.0 FR (uploader's multi-license; CC BY-SA 2.0 FR and CeCILL also offered)",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Aphrodite-MAHG_19025-High_poly-001.stl",
+    "attribution": "3D model by Rama (Wikimedia Commons), CC BY-SA 3.0 FR. Object: Musée d'art et d'histoire, Geneva.",
+    "triangle_count": 199999,
+    "has_texture": false,
+    "facts": [
+      "A Roman marble copy of a Hellenistic Greek statue of Aphrodite, goddess of love and beauty."
+    ],
+    "notes": "Photogrammetry by Wikimedia Commons user Rama. Untextured STL. The Commons 'Public domain' tag (where it appears) refers to the ancient artwork, not the 3D model; the model itself is CC BY-SA, so this glb (a derivative) should be shared under CC BY-SA with attribution to Rama. Object metadata from Wikidata. Real height unknown. The scan units were not meters, so it has been NORMALIZED to 1.00 m tall; rescale as you like. Headless, draped female torso.",
+    "bounds_m": {
+      "min": [
+        -0.2434,
+        0.0,
+        -0.1393
+      ],
+      "max": [
+        0.2434,
+        1.0,
+        0.1393
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "hapi_scribe",
+    "file": "hapi_scribe.glb",
+    "title": "Statue of Hapi the scribe",
+    "museum": "Per uploader: from Karnak; Commons category National Museum of Egyptian Civilization (unverified)",
+    "accession_number": "unknown",
+    "date": "New Kingdom (per uploader)",
+    "material": "Granite (per uploader)",
+    "real_height_m": null,
+    "category": "bartender",
+    "license": "CC BY-SA 4.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Statue_of_Hapi_the_Scribe,_3D_photogrammetry_scan_(STL).stl",
+    "attribution": "3D scan by Omar El Atabany (Wikimedia Commons user OmarElAtabany / ArchaeoArchive), CC BY-SA 4.0.",
+    "triangle_count": 159900,
+    "has_texture": false,
+    "facts": [
+      "Scribes held high status in ancient Egypt because very few people could read and write."
+    ],
+    "notes": "Recent (2025-2026) self-published Commons upload; museum/accession details come only from the uploader's description and are unverified. Untextured STL (uploader says a textured version is on archaeoarchive.com, but I found no direct no-login download). Scaled using the scan's native units, which appear to be meters but that is unverified. Seated or kneeling scribe with a papyrus on his lap. Native height is 1.12 units.",
+    "bounds_m": {
+      "min": [
+        -0.3613,
+        0.0,
+        -0.3759
+      ],
+      "max": [
+        0.3613,
+        1.1212,
+        0.3759
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "thutmose_iii",
+    "file": "thutmose_iii.glb",
+    "title": "Seated statue of King Thutmose III",
+    "museum": "Per uploader: from Karnak; Commons category National Museum of Egyptian Civilization (unverified)",
+    "accession_number": "unknown",
+    "date": "Thutmose III reigned c. 1479–1425 BC (18th Dynasty)",
+    "material": "Black granite (per uploader)",
+    "real_height_m": null,
+    "category": "dancer",
+    "license": "CC BY-SA 4.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Statue_of_King_Thutmose_III,_3D_photogrammetry_scan_(STL).stl",
+    "attribution": "3D scan by Omar El Atabany (Wikimedia Commons user OmarElAtabany / ArchaeoArchive), CC BY-SA 4.0.",
+    "triangle_count": 138564,
+    "has_texture": false,
+    "facts": [
+      "Thutmose III, an 18th Dynasty pharaoh, led many military campaigns and expanded Egypt's empire to its greatest extent."
+    ],
+    "notes": "Recent (2025-2026) self-published Commons upload; museum/accession details come only from the uploader's description and are unverified. Untextured STL (uploader says a textured version is on archaeoarchive.com, but I found no direct no-login download). Scaled using the scan's native units, which appear to be meters but that is unverified. The uploader's description wrongly says '19th Dynasty'; Thutmose III belongs to the 18th. Native height is 1.52 units.",
+    "bounds_m": {
+      "min": [
+        -0.249,
+        0.0,
+        -0.4163
+      ],
+      "max": [
+        0.249,
+        1.5223,
+        0.4163
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "khonsu",
+    "file": "khonsu.glb",
+    "title": "Statue of the god Khonsu",
+    "museum": "Per uploader: from the Temple of Khonsu, Karnak; Commons category National Museum of Egyptian Civilization (unverified)",
+    "accession_number": "unknown",
+    "date": "Late 18th Dynasty (per uploader, features associated with Tutankhamun)",
+    "material": "Granite (per uploader)",
+    "real_height_m": null,
+    "category": "dancer",
+    "license": "CC BY-SA 4.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Statue_of_Khonsu,_3D_photogrammetry_scan_(STL).stl",
+    "attribution": "3D scan by Omar El Atabany (Wikimedia Commons user OmarElAtabany / ArchaeoArchive), CC BY-SA 4.0.",
+    "triangle_count": 94780,
+    "has_texture": false,
+    "facts": [
+      "Khonsu was the moon god of Thebes, the son of Amun and Mut in the Theban Triad."
+    ],
+    "notes": "Recent (2025-2026) self-published Commons upload; museum/accession details come only from the uploader's description and are unverified. Untextured STL (uploader says a textured version is on archaeoarchive.com, but I found no direct no-login download). Scaled using the scan's native units, which appear to be meters but that is unverified. A standing, mummiform upright figure with a back pillar. Native height is 2.49 units, which matches the size of the well-known Khonsu statue from Karnak, so the units are probably meters.",
+    "bounds_m": {
+      "min": [
+        -0.4061,
+        0.0,
+        -0.3079
+      ],
+      "max": [
+        0.4061,
+        2.4928,
+        0.3079
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "aphrodite_dolphin",
+    "file": "aphrodite_dolphin.glb",
+    "title": "Statue of Aphrodite with a dolphin",
+    "museum": "Per uploader: Commons category Egyptian Museum (Cairo) (unverified)",
+    "accession_number": "unknown",
+    "date": "Greco-Roman period (not stated by uploader)",
+    "material": "Marble (presumed; not stated)",
+    "real_height_m": null,
+    "category": "female",
+    "license": "CC BY-SA 4.0",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Statue_of_Aphrodite_with_dolphin,_3D_photogrammetry_scan_(STL).stl",
+    "attribution": "3D scan by Omar El Atabany (Wikimedia Commons user OmarElAtabany / ArchaeoArchive), CC BY-SA 4.0.",
+    "triangle_count": 100008,
+    "has_texture": false,
+    "facts": [
+      "In Greek myth Aphrodite was born from the sea, which is why she is often shown with a dolphin."
+    ],
+    "notes": "Recent (2025-2026) self-published Commons upload; museum/accession details come only from the uploader's description and are unverified. Untextured STL (uploader says a textured version is on archaeoarchive.com, but I found no direct no-login download). Scaled using the scan's native units, which appear to be meters but that is unverified. A standing nude female on a rocky base. Native height is 1.63 units. I have not verified the date or material.",
+    "bounds_m": {
+      "min": [
+        -0.4061,
+        0.0,
+        -0.4043
+      ],
+      "max": [
+        0.4061,
+        1.6289,
+        0.4043
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  },
+  {
+    "slug": "kylix",
+    "file": "kylix.glb",
+    "title": "Kylix (two-handled drinking cup)",
+    "museum": "Cooper Hewitt, Smithsonian Design Museum",
+    "accession_number": "1971-48-12",
+    "date": "Greek; date uncertain (the museum metadata says ca. 800 BC, which is early for a kylix)",
+    "material": "Painted earthenware",
+    "real_height_m": 0.074,
+    "category": "jar",
+    "license": "CC0 1.0 (Smithsonian Open Access)",
+    "source_url": "https://3d.si.edu (3d_package:547c78d1-620b-40c4-982e-01928870fef4); file https://3d-api.si.edu/content/document/3d_package:547c78d1-620b-40c4-982e-01928870fef4/kylix-150k-2048-medium.glb",
+    "attribution": "Kylix, Greece, Cooper Hewitt, Smithsonian Design Museum, 1971-48-12, gift of Ruth Vollmer. 3D model: Smithsonian 3D Digitization, CC0.",
+    "triangle_count": 150000,
+    "has_texture": true,
+    "facts": [
+      "A kylix is a shallow, two-handled cup that Greeks used for drinking wine at symposia (drinking parties)."
+    ],
+    "notes": "Scanned and textured by the Smithsonian (CC0). The date and donor come from Smithsonian metadata as mirrored on Zenodo (record 21489107), because the Smithsonian Open Access API was rate-limited (DEMO_KEY) when I tried to confirm them directly. A date of 800 BC is early for the kylix shape, so check it before quoting. Scan units were mm, so real scale is preserved (0.22 m across the handles, 0.074 m tall). There was no genuine Egyptian beer or wine jar I could download without a login; this is the best real, openly licensed drinking vessel I found.",
+    "bounds_m": {
+      "min": [
+        -0.11,
+        0.0,
+        -0.0884
+      ],
+      "max": [
+        0.11,
+        0.0744,
+        0.0884
+      ]
+    },
+    "orientation": "Y-up, base on y=0, centered on x/z, front faces +Z"
+  }
+]

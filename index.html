@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Club Heru-Nefer</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Cg fill=%22none%22 stroke=%22%23e2b457%22 stroke-width=%223.2%22 stroke-linecap=%22round%22%3E%3Cellipse cx=%2216%22 cy=%228.5%22 rx=%225%22 ry=%226%22/%3E%3Cpath d=%22M16 14.5V30M7 17h18%22/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  @font-face { font-family: "EB Garamond"; src: url(vendor/fonts/eb-garamond-latin-400-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: "EB Garamond"; src: url(vendor/fonts/eb-garamond-latin-ext-400-normal.woff2) format("woff2"); unicode-range: U+0100-02AF, U+1E00-1EFF; }
+  @font-face { font-family: "EB Garamond"; src: url(vendor/fonts/eb-garamond-greek-400-normal.woff2) format("woff2"); unicode-range: U+0370-03FF; }
+  @font-face { font-family: "EB Garamond"; src: url(vendor/fonts/eb-garamond-greek-ext-400-normal.woff2) format("woff2"); unicode-range: U+1F00-1FFF; }
+  @font-face { font-family: "EB Garamond"; font-style: italic; src: url(vendor/fonts/eb-garamond-latin-400-italic.woff2) format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: "EB Garamond"; font-weight: 600; src: url(vendor/fonts/eb-garamond-latin-600-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: "Hiero"; src: url(vendor/fonts/noto-sans-egyptian-hieroglyphs-egyptian-hieroglyphs-400-normal.woff2) format("woff2"); }
+
+  :root {
+    --gold: #e2b457; --gold-dim: #9c7a36; --lapis: #1b3fa0; --turq: #18d4c4; --carnelian: #d04a32;
+    --ink: #f3e7cc; --panel: rgba(14, 10, 20, 0.84); --papyrus: #ead9b0; --papyrus-ink: #2a1c0e;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #05040a; color: var(--ink);
+    font-family: "EB Garamond", "Hiero", Georgia, serif; }
+  canvas { display: block; }
+  .hiero { font-family: "Hiero", serif; }
+
+  /* title */
+  #title { position: fixed; inset: 0; display: grid; place-items: center; z-index: 20;
+    background: radial-gradient(ellipse at 50% 40%, rgba(40, 20, 60, 0.55), rgba(3, 2, 8, 0.96) 70%); transition: opacity .8s; }
+  #title.hide { opacity: 0; pointer-events: none; }
+  .title-card { text-align: center; max-width: 620px; padding: 24px; }
+  .title-glyphs { font-family: "Hiero"; font-size: clamp(44px, 9vw, 86px); color: var(--gold); letter-spacing: 0.08em;
+    text-shadow: 0 0 24px rgba(226, 180, 87, 0.55), 0 0 2px #fff6; }
+  .title-name { font-size: clamp(30px, 5vw, 46px); letter-spacing: 0.32em; text-transform: uppercase; margin-top: 6px; }
+  .title-sub { font-style: italic; opacity: .8; font-size: 20px; margin: 6px 0 22px; }
+  .title-card p { font-size: 17px; line-height: 1.5; opacity: .88; }
+  #enter { margin-top: 18px; font: 600 20px "EB Garamond", "Hiero", serif; letter-spacing: .12em; color: #150d02;
+    background: linear-gradient(#f1cd7a, #c8963c); border: 0; padding: 12px 30px; border-radius: 999px; cursor: pointer;
+    box-shadow: 0 0 30px rgba(226, 180, 87, .45); }
+  #enter:disabled { opacity: .6; cursor: progress; }
+  #loading { margin-top: 10px; font-size: 14px; opacity: .6; min-height: 1.2em; font-style: italic; }
+  .controls { display: grid; grid-template-columns: auto auto; gap: 4px 16px; justify-content: center; margin-top: 18px; font-size: 15px; opacity: .8; text-align: left; }
+  kbd { font: 600 12px/1 ui-monospace, monospace; background: #2a2236; border: 1px solid #5a4a70; border-bottom-width: 2px;
+    border-radius: 4px; padding: 3px 6px; color: #fff; }
+
+  /* HUD */
+  #crosshair { position: fixed; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%;
+    background: rgba(255, 240, 210, .85); box-shadow: 0 0 6px rgba(255, 210, 120, .9); pointer-events: none; z-index: 5; }
+  #prompt { position: fixed; left: 50%; top: calc(50% + 26px); transform: translateX(-50%); font-size: 18px; padding: 5px 14px;
+    background: var(--panel); border: 1px solid #ffffff1a; border-radius: 999px; opacity: 0; transition: opacity .15s; pointer-events: none; z-index: 5; white-space: nowrap; }
+  #prompt.show { opacity: 1; }
+  #prompt b { color: var(--gold); font-weight: 600; }
+  .sparkle { color: var(--gold); letter-spacing: .1em; }
+  #caption { position: fixed; left: 18px; bottom: 18px; width: min(420px, calc(100vw - 36px)); padding: 14px 16px; background: var(--panel);
+    border: 1px solid #e2b45733; border-radius: 10px; opacity: 0; transform: translateY(8px); transition: .2s; pointer-events: none; z-index: 5; }
+  #caption.show { opacity: 1; transform: none; }
+  .cap-title { font-size: 21px; color: var(--gold); }
+  .cap-object { font-size: 14px; opacity: .7; font-style: italic; margin-bottom: 8px; }
+  .chips { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 6px 0 8px; }
+  .chip { font-size: 13px; padding: 2px 8px; border-radius: 999px; border: 1px solid #ffffff26; opacity: .6; }
+  .chip.on { opacity: 1; border-color: var(--gold); color: var(--gold); background: #e2b4571a; }
+  .arrow { opacity: .4; font-size: 12px; }
+  .cap-note { font-size: 16px; line-height: 1.42; }
+  .cap-hint { font-size: 15px; opacity: .65; font-style: italic; }
+  .cap-fid { margin-top: 8px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; opacity: .65; }
+  .cap-fid.reconstructed::before { content: "◇ "; color: var(--turq); }
+  .cap-fid.attested::before, .cap-fid.original::before { content: "◆ "; color: var(--gold); }
+  #wallet { position: fixed; right: 18px; top: 16px; font-size: 18px; padding: 6px 14px; background: var(--panel); border-radius: 999px; z-index: 5; }
+  .deben { color: var(--gold); font-weight: 600; }
+  #hint { position: fixed; left: 18px; top: 16px; font-size: 14px; opacity: .55; z-index: 5; }
+  #toast { position: fixed; left: 50%; top: 18%; transform: translateX(-50%); padding: 8px 18px; background: var(--panel);
+    border-radius: 999px; opacity: 0; transition: opacity .25s; z-index: 6; font-size: 17px; pointer-events: none; }
+  #toast.show { opacity: 1; }
+  #paused { position: fixed; inset: 0; display: none; place-items: center; z-index: 8; background: rgba(0,0,0,.35); cursor: pointer; font-size: 22px; letter-spacing: .1em; }
+  #paused.show { display: grid; }
+
+  /* dialogue */
+  #dialogue { position: fixed; left: 50%; bottom: 16vh; transform: translate(-50%, 20px); width: min(900px, calc(100vw - 32px));
+    max-height: 70vh; display: flex; flex-direction: column; background: var(--panel); border: 1px solid #e2b45744;
+    border-radius: 14px; padding: 18px 22px 14px; opacity: 0; pointer-events: none; transition: .25s; z-index: 10;
+    box-shadow: 0 10px 50px #000a; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  #dialogue.show { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+  #dname { font-size: 32px; color: var(--gold); }
+  #dsub { font-size: 16px; font-style: italic; opacity: .72; margin-bottom: 12px; }
+  #dtext { font-size: 23px; line-height: 1.5; overflow-y: auto; margin-bottom: 16px; }
+  #dtext .big-glyph { font-family: "Hiero"; font-size: 40px; color: var(--gold); vertical-align: middle; margin-right: 6px; }
+  #dtext .cite { font-size: 15px; opacity: .7; font-style: italic; margin-top: 8px; border-left: 2px solid var(--gold-dim); padding-left: 10px; }
+  #options { display: grid; grid-template-columns: 1fr; gap: 7px; }
+  #options.many { grid-template-columns: 1fr 1fr; }
+  #options button { text-align: left; font: 20px "EB Garamond", "Hiero", serif; color: var(--ink); background: #ffffff0a; border: 1px solid #ffffff14;
+    border-radius: 8px; padding: 9px 14px; cursor: pointer; }
+  #options .opt-sub, #dtext .opt-sub { display: block; font-size: 15px; opacity: .7; font-style: italic; }
+  @media (max-width: 700px) { #options.many { grid-template-columns: 1fr; } #dtext { font-size: 19px; } }
+  #nowplaying { position: fixed; right: 18px; bottom: 16px; font-size: 15px; padding: 6px 14px; background: var(--panel); border-radius: 999px; z-index: 5; max-width: 60vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #nowplaying:empty { display: none; }
+  .np-note { color: var(--turq); } .np-sub { opacity: .6; font-style: italic; margin-left: 4px; }
+  #lost { position: fixed; inset: 0; display: none; place-items: center; z-index: 30; background: #05040aee; text-align: center; font-size: 22px; }
+  #lost.show { display: grid; }
+  #lost button { margin-top: 14px; font: 600 18px "EB Garamond", serif; padding: 10px 24px; border-radius: 999px; border: 0; background: var(--gold); cursor: pointer; }
+  #options button:hover:not(:disabled) { background: #e2b45722; border-color: #e2b45777; }
+  #options button:disabled { opacity: .35; cursor: default; }
+  #options .num { display: inline-block; width: 22px; color: var(--gold); font-weight: 600; }
+  .esc { font-size: 13px; opacity: .5; margin-top: 8px; text-align: right; }
+
+  /* journal + credits */
+  .overlay { position: fixed; inset: 0; display: none; place-items: center; z-index: 12; background: rgba(0,0,0,.55); }
+  .overlay.show { display: grid; }
+  .papyrus { width: min(760px, calc(100vw - 32px)); max-height: 84vh; overflow-y: auto; padding: 28px 34px; color: var(--papyrus-ink);
+    background: linear-gradient(90deg, #0000000d 1px, transparent 1px) 0 0 / 7px 100%, linear-gradient(#0000000a 1px, transparent 1px) 0 0 / 100% 9px, var(--papyrus);
+    border-radius: 6px; box-shadow: 0 20px 80px #000c, inset 0 0 60px #8a6a3044; position: relative; }
+  .papyrus h2 { margin: 0 0 12px; font-weight: 400; font-size: 30px; }
+  .papyrus h3 { margin: 16px 0 6px; font-weight: 600; color: #7a2a18; }
+  .papyrus .st { font-size: 18px; margin: 2px 0; }
+  .papyrus .st .lab { display: inline-block; min-width: 118px; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; opacity: .6; }
+  .papyrus .st-translit { font-style: italic; }
+  .papyrus code { font-size: 13px; opacity: .7; }
+  .papyrus .note { font-size: 16px; opacity: .85; margin: 6px 0 0; }
+  .papyrus .empty { font-style: italic; }
+  .papyrus a { color: #7a2a18; }
+  .papyrus li { margin-bottom: 10px; }
+  .papyrus .lic { font-size: 14px; opacity: .8; }
+  .close { position: absolute; right: 14px; top: 10px; background: none; border: 0; font-size: 28px; cursor: pointer; color: var(--papyrus-ink); }
+
+  body.locked #hint { opacity: .35; }
+  @media (max-width: 700px) { #hint { display: none; } }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/three/jsm/" } }
+</script>
+</head>
+<body>
+  <div id="title">
+    <div class="title-card">
+      <div class="title-glyphs">𓉔𓂋𓅱𓇳𓄤𓆑𓂋</div>
+      <div class="title-name">Heru-Nefer</div>
+      <div class="title-sub">“The Good Day”: a nightclub for the ancient and the curious</div>
+      <p>Real statues are dancing and real inscriptions are carved into the walls. Carvings read best by low, raking light, so each one has its own lamp. Look at a line and press <kbd>E</kbd> to translate it.</p>
+      <div class="controls">
+        <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> + mouse</span><span>walk &amp; look (<kbd>Shift</kbd> to hurry)</span>
+        <span><kbd>E</kbd> / click</span><span>translate a line · talk · order</span>
+        <span><kbd>Q</kbd></span><span>dance with a statue</span>
+        <span><kbd>Space</kbd> · <kbd>N</kbd></span><span>hop to the beat · next track</span>
+        <span><kbd>J</kbd></span><span>your papyrus (everything you’ve read)</span>
+        <span><kbd>L</kbd></span><span>switch script: English · Greek · hieroglyphs (for laughs)</span>
+        <span><kbd>C</kbd> · <kbd>M</kbd></span><span>credits &amp; sources · mute</span>
+      </div>
+      <button id="enter" disabled>Carving the walls…</button>
+      <div id="loading"></div>
+    </div>
+  </div>
+
+  <div id="crosshair"></div>
+  <div id="prompt"></div>
+  <div id="caption"></div>
+  <div id="wallet"></div>
+  <div id="hint">E translate/talk · Q dance · N next track · J papyrus · C credits · M mute</div>
+  <div id="toast"></div>
+  <div id="nowplaying"></div>
+  <div id="lost"><div>The GPU took a nap. Your spot on the dance floor is saved.<br><button onclick="location.reload()">Wake it up</button></div></div>
+  <div id="paused">click to return to the dance floor</div>
+
+  <div id="dialogue">
+    <div id="dname"></div>
+    <div id="dsub"></div>
+    <div id="dtext"></div>
+    <div id="options"></div>
+    <div class="esc">1–9 to choose · Esc to walk away</div>
+  </div>
+
+  <div id="journal" class="overlay">
+    <div class="papyrus">
+      <button class="close" aria-label="Close">×</button>
+      <h2>Your Papyrus</h2>
+      <div id="journal-body"></div>
+    </div>
+  </div>
+
+  <div id="credits" class="overlay">
+    <div class="papyrus">
+      <button class="close" aria-label="Close">×</button>
+      <h2>Credits &amp; Sources</h2>
+      <h3>3D scans</h3>
+      <ul id="credits-models"></ul>
+      <h3>Texts</h3>
+      <p class="note">Every inscription is a real ancient text: the Rosetta Stone (British Museum EA 24), the harpers’ songs, the offering formula, epithets of Hathor, Alcaeus fr. 332, 346, 366 and 333, the Seikilos epitaph, Sappho fr. 2 and 31, Greek tourist graffiti from the Valley of the Kings, and Papyrus Chester Beatty I. Greek is quoted from the standard editions. Hieroglyphs marked ◇ are my own sign-by-sign typesetting of attested words. They can differ from a specific original monument, so check them against a sign list before you cite them. The English translations are mine and follow the standard scholarly ones.</p>
+      <h3>Type &amp; code</h3>
+      <p class="note">Hieroglyphs: Noto Sans Egyptian Hieroglyphs (SIL OFL). Greek &amp; Latin: EB Garamond (SIL OFL). Rendering: three.js (MIT). The music is synthesised live in your browser.</p>
+    </div>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+node_modules/
+# big source files: raw downloads and full-resolution scans stay local
+assets/raw/
+assets/models_full/
