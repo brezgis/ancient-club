@@ -7,27 +7,33 @@ function hash(x, y, seed) {
   return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
 }
 
-// Periodic value noise so textures tile seamlessly.
-function makeNoise(period, seed) {
-  return (x, y) => {
-    const xi = Math.floor(x), yi = Math.floor(y);
-    const xf = x - xi, yf = y - yi;
-    const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
-    const p = (a) => ((a % period) + period) % period;
-    const a = hash(p(xi), p(yi), seed), b = hash(p(xi + 1), p(yi), seed);
-    const c = hash(p(xi), p(yi + 1), seed), d = hash(p(xi + 1), p(yi + 1), seed);
-    return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
-  };
-}
-
-function fbm(noises, x, y, size) {
-  let v = 0, amp = 0.5, tot = 0;
-  for (let o = 0; o < noises.length; o++) {
-    const f = noises[o].period / size;
-    v += noises[o].fn(x * f, y * f) * amp;
-    tot += amp; amp *= 0.5;
-  }
-  return v / tot;
+// Fractal value noise that tiles over a size×size canvas. Each octave is a periodic lattice of
+// random values, bilinearly smoothed; the lattice and per-column weights are computed once
+// per octave, so the inner loop is just table lookups.
+function fbmField(size, periods, seed) {
+  const out = new Float32Array(size * size);
+  let amp = 0.5, total = 0;
+  const x0 = new Int32Array(size), x1 = new Int32Array(size), u = new Float32Array(size);
+  periods.forEach((period, o) => {
+    const lat = new Float32Array(period * period);
+    for (let j = 0; j < period; j++) for (let i = 0; i < period; i++) lat[j * period + i] = hash(i, j, seed + o);
+    const f = period / size;
+    for (let x = 0; x < size; x++) {
+      const p = x * f, i = Math.floor(p), t = p - i;
+      x0[x] = i % period; x1[x] = (i + 1) % period; u[x] = t * t * (3 - 2 * t);
+    }
+    for (let y = 0; y < size; y++) {
+      const r0 = x0[y] * period, r1 = x1[y] * period, v = u[y];
+      for (let x = 0; x < size; x++) {
+        const a = lat[r0 + x0[x]], b = lat[r0 + x1[x]], c = lat[r1 + x0[x]], d = lat[r1 + x1[x]];
+        const ux = u[x];
+        out[y * size + x] += (a + (b - a) * ux + (c - a) * v + (a - b - c + d) * ux * v) * amp;
+      }
+    }
+    total += amp; amp *= 0.5;
+  });
+  for (let i = 0; i < out.length; i++) out[i] /= total;
+  return out;
 }
 
 export const STONES = {
@@ -51,26 +57,24 @@ export function stoneTile(kind, size = 512, seed = 1) {
   c.width = c.height = size;
   const ctx = c.getContext('2d');
   const img = ctx.createImageData(size, size);
-  const noises = [4, 8, 16, 32, 64, 128].map((p, i) => ({ period: p, fn: makeNoise(p, seed * 17 + i) }));
-  const veinNoise = [3, 6, 12, 24].map((p, i) => ({ period: p, fn: makeNoise(p, seed * 31 + i + 99) }));
-  for (let y = 0; y < size; y++) {
-    for (let x = 0; x < size; x++) {
-      const n = fbm(noises, x, y, size);
-      let r = s.base[0] + (n - 0.5) * 2 * s.vary[0];
-      let g = s.base[1] + (n - 0.5) * 2 * s.vary[1];
-      let b = s.base[2] + (n - 0.5) * 2 * s.vary[2];
-      if (s.vein) {
-        const vn = fbm(veinNoise, x, y, size);
-        const band = Math.abs(Math.sin((x / size + vn * 1.6) * Math.PI * 3));
+  const n = fbmField(size, [4, 8, 16, 32, 64, 128], seed * 17);
+  const vn = s.vein && fbmField(size, [3, 6, 12, 24], seed * 31 + 99);
+  const [br, bg, bb] = s.base, [vr, vg, vb] = s.vary;
+  for (let y = 0, i = 0; y < size; y++) {
+    for (let x = 0; x < size; x++, i++) {
+      const k = (n[i] - 0.5) * 2;
+      let r = br + k * vr, g = bg + k * vg, b = bb + k * vb;
+      if (vn) {
+        const band = Math.abs(Math.sin((x / size + vn[i] * 1.6) * Math.PI * 3));
         const vv = Math.pow(1 - band, 18) * 0.8;
         r += (s.vein[0] - r) * vv; g += (s.vein[1] - g) * vv; b += (s.vein[2] - b) * vv;
       }
       if (s.speck && hash(x, y, seed + 7) < s.speck * 0.25) {
-        const k = 0.5 + hash(y, x, seed) * 0.5;
-        r += (s.speckColor[0] - r) * k; g += (s.speckColor[1] - g) * k; b += (s.speckColor[2] - b) * k;
+        const k2 = 0.5 + hash(y, x, seed) * 0.5;
+        r += (s.speckColor[0] - r) * k2; g += (s.speckColor[1] - g) * k2; b += (s.speckColor[2] - b) * k2;
       }
-      const i = (y * size + x) * 4;
-      img.data[i] = r; img.data[i + 1] = g; img.data[i + 2] = b; img.data[i + 3] = 255;
+      const j = i * 4;
+      img.data[j] = r; img.data[j + 1] = g; img.data[j + 2] = b; img.data[j + 3] = 255;
     }
   }
   ctx.putImageData(img, 0, 0);
@@ -80,9 +84,7 @@ export function stoneTile(kind, size = 512, seed = 1) {
 
 // Fine grain bump for stone faces, as a normal map.
 export function grainNormalTile(size = 256, seed = 3, strength = 1.2) {
-  const noises = [16, 32, 64, 128].map((p, i) => ({ period: p, fn: makeNoise(p, seed + i) }));
-  const h = new Float32Array(size * size);
-  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) h[y * size + x] = fbm(noises, x, y, size);
+  const h = fbmField(size, [16, 32, 64, 128], seed);
   const c = document.createElement('canvas');
   c.width = c.height = size;
   const ctx = c.getContext('2d');
@@ -94,24 +96,16 @@ export function grainNormalTile(size = 256, seed = 3, strength = 1.2) {
 
 // height: Float32Array in [0,1], 1 = surface. Writes RGBA normal map into out.
 export function heightToNormal(height, w, h, strength, out, wrap = false) {
-  const at = (x, y) => {
-    if (wrap) { x = (x + w) % w; y = (y + h) % h; }
-    else { x = Math.max(0, Math.min(w - 1, x)); y = Math.max(0, Math.min(h - 1, y)); }
-    return height[y * w + x];
-  };
   for (let y = 0; y < h; y++) {
+    const yu = y > 0 ? y - 1 : (wrap ? h - 1 : 0), yd = y < h - 1 ? y + 1 : (wrap ? 0 : h - 1);
     for (let x = 0; x < w; x++) {
-      const dx = (at(x + 1, y) - at(x - 1, y)) * strength;
-      const dy = (at(x, y + 1) - at(x, y - 1)) * strength;
-      // canvas rows go down while texture v goes up, hence +dy
-      let nx = -dx, ny = dy, nz = 1;
-      const l = Math.hypot(nx, ny, nz);
-      nx /= l; ny /= l; nz /= l;
+      const xl = x > 0 ? x - 1 : (wrap ? w - 1 : 0), xr = x < w - 1 ? x + 1 : (wrap ? 0 : w - 1);
+      // canvas rows go down while texture v goes up, hence ny = +dy
+      const nx = -(height[y * w + xr] - height[y * w + xl]) * strength;
+      const ny = (height[yd * w + x] - height[yu * w + x]) * strength;
+      const k = 127.5 / Math.sqrt(nx * nx + ny * ny + 1);
       const i = (y * w + x) * 4;
-      out[i] = (nx * 0.5 + 0.5) * 255;
-      out[i + 1] = (ny * 0.5 + 0.5) * 255;
-      out[i + 2] = (nz * 0.5 + 0.5) * 255;
-      out[i + 3] = 255;
+      out[i] = nx * k + 127.5; out[i + 1] = ny * k + 127.5; out[i + 2] = k + 127.5; out[i + 3] = 255;
     }
   }
 }

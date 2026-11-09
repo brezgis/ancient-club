@@ -20,31 +20,17 @@ export function signChar(code) {
   return String.fromCodePoint(cp);
 }
 
-// Ink bounding box of a sign, in em units, relative to the text origin.
+// Ink bounding box of a sign, in em units, relative to the text origin (read from the font's outlines).
+const measureCtx = document.createElement('canvas').getContext('2d');
 function measureSign(code) {
-  if (measureCache.has(code)) return measureCache.get(code);
-  const c = document.createElement('canvas');
-  c.width = c.height = MEASURE_PX * 2;
-  const ctx = c.getContext('2d', { willReadFrequently: true });
-  ctx.font = `${MEASURE_PX}px ${HIERO_FONT}`;
-  ctx.textBaseline = 'alphabetic';
-  ctx.fillStyle = '#000';
-  const ox = MEASURE_PX * 0.5, oy = MEASURE_PX * 1.5;
-  ctx.fillText(signChar(code), ox, oy);
-  const { data } = ctx.getImageData(0, 0, c.width, c.height);
-  let x0 = c.width, y0 = c.height, x1 = -1, y1 = -1;
-  for (let y = 0; y < c.height; y++) {
-    for (let x = 0; x < c.width; x++) {
-      if (data[(y * c.width + x) * 4 + 3] > 20) {
-        if (x < x0) x0 = x; if (x > x1) x1 = x;
-        if (y < y0) y0 = y; if (y > y1) y1 = y;
-      }
-    }
-  }
-  const m = x1 < 0
-    ? { ox: 0, oy: 0, w: 0.3, h: 0.3 }
-    : { ox: (x0 - ox) / MEASURE_PX, oy: (y0 - oy) / MEASURE_PX,
-        w: (x1 - x0 + 1) / MEASURE_PX, h: (y1 - y0 + 1) / MEASURE_PX };
+  let m = measureCache.get(code);
+  if (m) return m;
+  measureCtx.font = `${MEASURE_PX}px ${HIERO_FONT}`;
+  const t = measureCtx.measureText(signChar(code));
+  const w = t.actualBoundingBoxLeft + t.actualBoundingBoxRight, h = t.actualBoundingBoxAscent + t.actualBoundingBoxDescent;
+  m = w > 0 && h > 0
+    ? { ox: -t.actualBoundingBoxLeft / MEASURE_PX, oy: -t.actualBoundingBoxAscent / MEASURE_PX, w: w / MEASURE_PX, h: h / MEASURE_PX }
+    : { ox: 0, oy: 0, w: 0.3, h: 0.3 };
   measureCache.set(code, m);
   return m;
 }

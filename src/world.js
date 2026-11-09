@@ -1,6 +1,6 @@
 // The club's architecture: hall, dance floor, DJ booth, bar, bathroom, and the lights.
 import * as THREE from 'three';
-import { stoneMaterial, stoneTile } from './stone.js';
+import { stoneMaterial } from './stone.js';
 import { signChar, HIERO_FONT } from './glyphs.js';
 import { InscribedSlab } from './slab.js';
 import { SLABS } from './texts.js';
@@ -14,6 +14,11 @@ export const DANCE = { x: 0, z: -1, r: 5.2 };
 // Egyptian jewellery colours: lapis, turquoise, carnelian, gold
 export const PALETTE = [0x2448ff, 0x18d4c4, 0xff3a2a, 0xffb020, 0xc040ff];
 
+// Let the browser paint and handle input between long chunks of work. Unlike setTimeout,
+// this isn't throttled to once a second when the tab is in the background.
+const yieldToBrowser = () => globalThis.scheduler?.yield?.()
+  ?? new Promise(r => { const c = new MessageChannel(); c.port1.onmessage = r; c.port2.postMessage(0); });
+
 export class World {
   constructor(scene) {
     this.scene = scene;
@@ -23,12 +28,13 @@ export class World {
     this.animated = [];       // objects with update(dt, t, beat)
     this.discoLights = [];
     this.lamps = [];          // lamp specs, lit by the shared LampPool
-    this.build();
+    this.hallLights = 1;      // 0–1: the disco rig dims while you are in the bathroom
   }
 
   box(x0, x1, z0, z1) { this.colliders.push({ x0, x1, z0, z1 }); }
 
-  build() {
+  // Carving the inscriptions is the slow part, so build yields between slabs and reports progress (0–1).
+  async build(onProgress = () => {}) {
     const s = this.scene;
     this.buildHall();
     this.buildDanceFloor();
@@ -37,7 +43,7 @@ export class World {
     this.buildDJ();
     this.buildBar();
     this.buildBathroom();
-    this.placeSlabs();
+    await this.placeSlabs(onProgress);
     this.buildLights();
     this.buildMirrorBall();
     this.pool = new LampPool(this.scene, Q.lampPool);
@@ -478,13 +484,11 @@ export class World {
       if (i !== 1) this.box(x - 0.7, x + 0.7, z1 - 1.55, z1 - 1.45);
     }
 
-    // hard white light (with a touch of flicker)
-    const lights = [];
+    // hard white light
     for (const [x, z] of [[-18.2, 3.8], [-18.2, 8.2]]) {
       const l = new THREE.PointLight(0xfff6ee, 2.6, 11, 1.3);
-      l.position.set(x, h - 0.2, z);
+      l.position.set(x, h - 0.6, z);   // a little below the ceiling, so it doesn't hot-spot
       this.scene.add(l);
-      lights.push(l);
       const panel = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.03, 0.3), new THREE.MeshBasicMaterial({ color: 0xffffff }));
       panel.position.set(x, h - 0.02, z);
       this.scene.add(panel);
@@ -492,7 +496,7 @@ export class World {
     // Hollywood vanity bulbs around the mirror
     const bulbMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(0xfff1dc).multiplyScalar(1.6) });
     const bulbGeo = new THREE.SphereGeometry(0.045, 12, 8);
-    const ms = { y: 1.9, z: 6, w: 5.6, h: 1.5 };
+    const ms = this.mirrorSpec;
     for (let k = 0; k < 13; k++) {
       const b = new THREE.Mesh(bulbGeo, bulbMat);
       b.position.set(x0 + 0.08, ms.y + ms.h / 2 + 0.14, ms.z - ms.w / 2 + (k / 12) * ms.w);
@@ -507,8 +511,10 @@ export class World {
   }
 
   // --- inscriptions ---------------------------------------------------------------
-  placeSlabs() {
-    const put = (key, opts, x, y, z, ry) => {
+  async placeSlabs(onProgress) {
+    const queue = [];
+    const put = (...args) => queue.push(args);
+    const carve = (key, opts, x, y, z, ry) => {
       const s = new InscribedSlab(SLABS[key], opts);
       s.key = key;
       s.group.position.set(x, y, z);
@@ -538,6 +544,11 @@ export class World {
     put('mirror', { width: 1.4, height: 1.1, depth: 0.08, lightColor: 0xffffff, lightIntensity: 0.9 }, (B.x0 + B.x1) / 2 + 1.5, 1.65, B.z0 + 0.05, 0);
     put('sappho', { width: 1.8, height: 1.9, depth: 0.08, lightColor: 0xffe8f0, lineHeight: 0.36, lightIntensity: 1.6 }, B.x1 - 0.06, 1.55, 3.2, -Math.PI / 2);
     put('lovesong', { width: 1.5, height: 0.8, depth: 0.08, lightColor: 0xffffff, lightIntensity: 0.9 }, (B.x0 + B.x1) / 2 - 1.5, 1.8, B.z0 + 0.05, 0);
+    for (const [i, args] of queue.entries()) {
+      await yieldToBrowser();
+      carve(...args);
+      onProgress((i + 1) / queue.length);
+    }
     // door sign lamp
     this.addLamp({ pos: new THREE.Vector3(x0 + 0.7, 3.9, (DOOR.z0 + DOOR.z1) / 2), target: new THREE.Vector3(x0, 2.9, (DOOR.z0 + DOOR.z1) / 2),
       color: 0xffc98a, intensity: 4, distance: 4, angle: Math.PI / 4, penumbra: 0.7, decay: 1.2 });
@@ -600,7 +611,6 @@ export class World {
       this.rims.push(r);
     }
 
-    const tmp = new THREE.Vector3();
     this.animated.push({
       update: (dt, t, beat) => {
         for (const d of this.discoLights) {
@@ -616,7 +626,8 @@ export class World {
           }
           const e = beat.energy ?? 0.7;
           const flash = (beat.bar % 4 === 3 && e > 0.8 ? (beat.pulse > 0.5 ? 1 : 0.15) : 0.35 + 0.65 * beat.pulse) * (0.35 + 0.65 * e);
-          d.spot.intensity = 70 * flash;
+          // walls don't stop unshadowed light, so the rig fades out while you're in the bathroom
+          d.spot.intensity = 70 * flash * this.hallLights;
           d.beam.material.uniforms.uI.value = 0.22 * flash;
           d.beam.lookAt(d.spot.target.position);
           d.head.lookAt(d.spot.target.position);
@@ -633,7 +644,6 @@ export class World {
         this.ceilingTex.offset.x += dt * 0.004;
       },
     });
-    tmp.set(0, 0, 0);
   }
 
   // --- the mirror ball: specks of light swept across the room, and ceiling lasers ---------
@@ -743,7 +753,8 @@ export class World {
   }
 
   update(dt, t, beat, sparkles, playerPos) {
-    if (playerPos) this.pool.update(dt, this.lamps, playerPos, playerPos.x < HALL.x0);
+    this.hallLights = THREE.MathUtils.clamp((playerPos.x - (HALL.x0 - 1.2)) / 1.2, 0, 1);
+    this.pool.update(dt, this.lamps, playerPos, playerPos.x < HALL.x0);
     for (const a of this.animated) a.update(dt, t, beat);
     for (const s of this.slabs) s.update(dt, sparkles);
   }

@@ -1,10 +1,11 @@
 // An inscribed stone slab. Each line of text is its own carved surface so it can be
-// re-carved (translated) independently, with a sparkling wipe.
+// re-carved (translated into English, and back) independently, with a sparkling wipe.
 import * as THREE from 'three';
 import { typesetHieroglyphs } from './glyphs.js';
 import { stoneTile, STONES, heightToNormal, stoneMaterial } from './stone.js';
 
 const PPM = 600; // default texture pixels per metre of stone
+const SIDE_SEED = 2;
 
 // Canvas filters (blur) aren't in Safari 17; test by actually blurring a dot.
 const CANVAS_BLUR = (() => {
@@ -81,14 +82,16 @@ class CarvedLine {
     this.slab = slab;
     this.index = index;
     this.def = def;
-    this.stage = 0;
+    // the carving flips between the original script and English; any stages in between
+    // (transliteration, Greek) are shown in the caption instead
+    this.faces = [def.stages[0], def.stages.find(st => st.script === 'english') ?? def.stages.at(-1)];
+    this.translated = false;
     this.w = Math.round(rect.w * slab.ppm);
     this.h = Math.round(rect.h * slab.ppm);
-    this.inks = def.stages.map(s => renderInk(s, this.w, this.h));
+    this.inks = this.faces.map(f => renderInk(f, this.w, this.h));
     this.transition = null; // {from, to, t}
     this.glow = 0;
     this.hover = 0;
-    this.translatedOnce = false;
 
     const mk = () => { const c = document.createElement('canvas'); c.width = this.w; c.height = this.h; return c; };
     this.mask = mk();
@@ -122,8 +125,8 @@ class CarvedLine {
     this.compose(this.inks[0]);
   }
 
-  get current() { return this.def.stages[this.stage]; }
-  get next() { return this.def.stages[(this.stage + 1) % this.def.stages.length]; }
+  // the in-between readings worth showing alongside the English (transliteration, Greek)
+  get readings() { return this.def.stages.filter(st => !this.faces.includes(st)); }
 
   // Build colour / normal / glow maps from the current ink mask.
   compose(maskSource, freshMask = null) {
@@ -186,11 +189,12 @@ class CarvedLine {
     this.glowTex.needsUpdate = true;
   }
 
-  advance() {
-    if (this.transition) return false;
-    const from = this.stage, to = (this.stage + 1) % this.def.stages.length;
-    this.transition = { from, to, t: 0, dur: 1.25 + this.w / 2400 };
-    return true;
+  // Start re-carving into the other face. Returns the duration, or 0 if already carving.
+  toggle() {
+    if (this.transition) return 0;
+    const from = +this.translated;
+    this.transition = { from, to: 1 - from, t: 0, dur: 1.25 + this.w / 2400 };
+    return this.transition.dur;
   }
 
   update(dt, sparkles) {
@@ -234,10 +238,9 @@ class CarvedLine {
         }
       }
       if (p >= 1) {
-        this.stage = tr.to;
+        this.translated = tr.to === 1;
         this.transition = null;
-        this.compose(this.inks[this.stage]);
-        this.translatedOnce = true;
+        this.compose(this.inks[tr.to]);
         this.slab.onLineDone?.(this);
       }
     }
@@ -265,8 +268,10 @@ export class InscribedSlab {
     this.faceColor = document.createElement('canvas');
     this.faceColor.width = fw; this.faceColor.height = fh;
     const fc = this.faceColor.getContext('2d');
-    const tile = stoneTile(def.stone, 512, (def.title.length * 7) % 13 + 1);
-    for (let y = 0; y < fh; y += 512) for (let x = 0; x < fw; x += 512) fc.drawImage(tile, x, y);
+    // same tile as the slab's sides (so it's generated once), shifted per slab so no two faces match
+    const tile = stoneTile(def.stone, 512, SIDE_SEED);
+    const ox = (def.title.length * 97) % 512, oy = (def.title.length * 59) % 512;
+    for (let y = -oy; y < fh; y += 512) for (let x = -ox; x < fw; x += 512) fc.drawImage(tile, x, y);
 
     const borderC = document.createElement('canvas');
     borderC.width = fw; borderC.height = fh;
@@ -303,7 +308,7 @@ export class InscribedSlab {
       map: faceMap, normalMap: faceNormalTex, roughness: s.rough, metalness: s.metal ?? 0,
       normalScale: new THREE.Vector2(1.4, 1.4),
     });
-    const side = stoneMaterial(def.stone, { repeat: 1, seed: 2 });
+    const side = stoneMaterial(def.stone, { repeat: 1, seed: SIDE_SEED });
     const body = new THREE.Mesh(new THREE.BoxGeometry(width, height, depth),
       [side, side, side, side, faceMat, side]);
     body.castShadow = false;

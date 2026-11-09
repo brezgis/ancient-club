@@ -6,17 +6,33 @@ import { stoneMaterial, STONES } from './stone.js';
 
 const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
 
+const MODELS = 'assets/models/';
+const downloads = new Map();
+
 export async function loadManifest() {
   try {
-    const r = await fetch('assets/models/manifest.json', { cache: 'no-cache' });
-    if (!r.ok) return [];
-    return await r.json();
+    const r = await fetch(`${MODELS}manifest.json`, { cache: 'no-cache' });
+    return r.ok ? await r.json() : [];
   } catch { return []; }
+}
+
+// Start downloading every scan at once, so the network works while the CPU carves the walls.
+export function prefetch(manifest) {
+  for (const info of manifest) download(info);
+}
+function download(info) {
+  if (!downloads.has(info.file)) {
+    downloads.set(info.file, fetch(MODELS + info.file).then(r => {
+      if (!r.ok) throw new Error(`${r.status} ${info.file}`);
+      return r.arrayBuffer();
+    }));
+  }
+  return downloads.get(info.file);
 }
 
 // Load a model, normalise it so the base sits on y=0, centred, `height` metres tall.
 export async function loadStatue(info, height, stoneKind = 'limestone') {
-  const gltf = await loader.loadAsync(`assets/models/${info.file}`);
+  const gltf = await loader.parseAsync(await download(info), MODELS);
   const obj = gltf.scene;
   obj.updateMatrixWorld(true);
   const box = new THREE.Box3().setFromObject(obj);

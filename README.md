@@ -20,8 +20,8 @@ Three thousand years of standing perfectly still, and they have *had it*. Tonigh
 
 Club Heru-Nefer is a walkable 3D nightclub that runs in your browser. The statues are **real 3D scans of real
 museum pieces**. The walls are carved with **real ancient texts**, which you can translate line by line: look at
-a line, press **E**, and watch the hieroglyphs dissolve in sparkles and re-carve themselves as transliteration,
-then Greek, then English. Then go and bother Nefertiti on the dance floor. She has opinions.
+a line, press **E**, and watch the hieroglyphs dissolve in sparkles and re-carve themselves in English, with the
+transliteration and the Greek alongside. Then go and bother Nefertiti on the dance floor. She has opinions.
 
 Its name comes from the harpers’ songs: *jr hrw nfr*, “make holiday!” Egyptians carved that into their tombs.
 We carved it over the bar.
@@ -87,12 +87,6 @@ fixing her hair, and two Amarna princesses are gossiping on the counter. A tipsy
 banqueting lady from the tomb of Paheri: *“Give me eighteen cups of wine!”* Someone has written Sappho on the
 stall.
 
-### 🔀 Press L for chaos
-![The whole UI spelled out in hieroglyphic alphabet signs](docs/screenshots/hiero.jpg)
-
-The **script toggle** respells the entire interface: English, English in Greek letters, or English in hieroglyphic
-“alphabet” signs, gift-shop style. It is not real Greek or real Egyptian, and it knows. It is extremely funny.
-
 ---
 
 ## The music
@@ -151,16 +145,16 @@ yet.
 | Key | Does |
 |---|---|
 | **W A S D** + mouse | walk & look (**Shift** to hurry) |
-| **E** / click | translate a line · talk · order |
+| **E** / click | translate a line into English (and back) · talk · order |
 | **Q** | dance with a statue |
 | **Space** | hop to the beat |
 | **N** | next track |
-| **L** | switch script: English → Greek letters → hieroglyphs |
 | **J** | your papyrus: everything you’ve read |
 | **C** · **M** | credits · mute |
+| **H** | all of the above, in the club |
 
 **On a laptop?** The club checks your GPU and picks a quality tier. Apple and Intel GPUs get the light version:
-1× resolution, no shadows, and fewer live lights. Add `?quality=low` or `?quality=high` to the URL to override.
+no shadows, no MSAA, and fewer live lights (both tiers render at up to 1.5× on retina screens, so text stays sharp). Add `?quality=low` or `?quality=high` to the URL to override.
 If frames drop anyway, it steps down on its own.
 
 ---
@@ -180,12 +174,18 @@ If frames drop anyway, it steps down on its own.
 - **`src/audio.js`** + **`src/tracks.js`**: a small WebAudio sequencer with a worker clock, so the music keeps
   going when the tab is busy or in the background. Six tracks, each an arrangement of 8-bar sections.
 - **`src/world.js`**: the architecture, the disco rig, the mirror ball, the lasers, and a **lamp pool**. The club
-  has dozens of lamps but only a handful of real lights, handed to whichever lamps are nearest you.
+  has dozens of lamps but only a handful of real lights, handed to whichever lamps are nearest you. The walls are
+  carved a slab at a time, yielding to the browser in between, so the loading card never freezes.
+- **`src/cast.js`**: who plays whom, where everyone stands, and the social director that sends statues to the bar.
+- **`src/mirror.js`**: the bathroom mirror, which only re-renders the room while you're near it.
+- **`src/post.js`**: bloom, the wine wobble, MSAA, and a quality ladder that steps down if frames get slow.
+- **`src/player.js`**, **`src/ui.js`**, **`src/main.js`**: you, the screen furniture, and the wiring.
 - **`src/quality.js`**: GPU tiering.
 - **`tools/shot.mjs`**: headless screenshots, used to make everything on this page.
 
 The scans were simplified and meshopt-compressed with `gltfpack`, from 95 MB down to 4.8 MB. The raw and
-full-resolution files aren’t in the repo.
+full-resolution files aren’t in the repo. They start downloading the moment the page opens, while the walls are
+still being carved. three.js is vendored minified (`vendor/three/*.min.js`, built from the npm package with esbuild).
 
 ---
 

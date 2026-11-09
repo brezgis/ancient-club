@@ -1,6 +1,8 @@
 // Every inscription in the club. All texts are real ancient texts.
 //
-// Each line is a sequence of stages; pressing E on a line re-carves it into the next stage.
+// Each line lists its readings in order, original first and English last. Pressing E re-carves
+// the line between the original and the English; the readings in between (transliteration,
+// Greek) are shown in the caption and kept on your papyrus.
 //   hiero    : Manuel-de-Codage-ish sign codes (see glyphs.js)
 //   translit : Egyptological transliteration (older ȝ / ʿ convention, which the font supports)
 //   greek    : ancient Greek
