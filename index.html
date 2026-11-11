@@ -8,6 +8,10 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Cg fill=%22none%22 stroke=%22%23e2b457%22 stroke-width=%223.2%22 stroke-linecap=%22round%22%3E%3Cellipse cx=%2216%22 cy=%228.5%22 rx=%225%22 ry=%226%22/%3E%3Cpath d=%22M16 14.5V30M7 17h18%22/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preload" href="vendor/fonts/eb-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="vendor/fonts/noto-sans-egyptian-hieroglyphs-egyptian-hieroglyphs-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<!-- The import map has to come before any modulepreload, or Firefox ignores it and "three" never resolves. -->
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/jsm/" } }
+</script>
 <link rel="modulepreload" href="vendor/three/three.core.min.js">
 <link rel="modulepreload" href="vendor/three/three.module.min.js">
 <style>
@@ -139,9 +143,6 @@
     #hint, #nowplaying { display: none; }
   }
 </style>
-<script type="importmap">
-{ "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/jsm/" } }
-</script>
 </head>
 <body>
   <div id="title">
