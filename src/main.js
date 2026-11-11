@@ -28,7 +28,16 @@ const state = {
 };
 
 // --- renderer, scene, camera ---------------------------------------------------------
-const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance', preserveDrawingBuffer: SHOT });
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance', preserveDrawingBuffer: SHOT });
+} catch (err) {
+  // Without this the title card sits on "Opening the doors…" forever.
+  const enter = document.getElementById('enter');
+  enter.textContent = 'The club needs WebGL. Try turning on hardware acceleration, or another browser.';
+  enter.style.whiteSpace = 'normal';
+  throw err;
+}
 initQuality(renderer.getContext());
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
